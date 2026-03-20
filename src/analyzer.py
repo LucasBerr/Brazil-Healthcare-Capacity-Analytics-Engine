@@ -23,13 +23,7 @@ def merge_df_in_city(df_hosp, df_popul):
         "DS_TIPO_UNIDADE",
         "NU_TELEFONE",
         "NO_EMAIL",
-        "LEITOS_EXISTENTES",
-        "UTI_ADULTO_EXIST",
-        "UTI_ADULTO_SUS",
-        "UTI_PEDIATRICO_EXIST",
-        "UTI_PEDIATRICO_SUS",
-        "UTI_NEONATAL_EXIST",
-        "UTI_NEONATAL_SUS",
+        "LEITOS_SUS",
         "POPULAÇÃO ESTIMADA"
     ]]
     
@@ -47,28 +41,21 @@ def normalize_text(text):
     return text
 
 
-def uti_per_capita_in_city(df_hosp, df_popul):
+def hospital_bed_per_capita_in_city(df_hosp, df_popul):
     df_merged = merge_df_in_city(df_hosp, df_popul)
 
     df_city = df_merged.groupby(["UF", "MUNICIPIO_NORM"]).agg({
-        "UTI_ADULTO_SUS": "sum",
-        "UTI_PEDIATRICO_SUS": "sum",
-        "UTI_NEONATAL_SUS": "sum",
+        "LEITOS_SUS": "sum",
         "POPULAÇÃO ESTIMADA": "first"
     }).reset_index()
 
-    df_city["UTI_TOTAL_SUS"] = (
-        df_city["UTI_ADULTO_SUS"] +
-        df_city["UTI_PEDIATRICO_SUS"] +
-        df_city["UTI_NEONATAL_SUS"]
-    )
 
-    df_city["UTI_TOTAL_PER_CAPITA"] = (
-        df_city["UTI_TOTAL_SUS"] / df_city["POPULAÇÃO ESTIMADA"]
+    df_city["LEITOS_TOTAL_PER_THOUSAND"] = (
+        df_city["LEITOS_SUS"] / df_city["POPULAÇÃO ESTIMADA"] * 1000
     )
 
     return df_city.sort_values(
-        by="UTI_TOTAL_PER_CAPITA",
+        by="LEITOS_TOTAL_PER_THOUSAND",
         ascending=False
     )
 
@@ -77,7 +64,7 @@ def get_large_cities(df, min_population=100_000, top_n=10, worst=True):
 
     df = (
         df_filtered
-        .sort_values("UTI_TOTAL_PER_CAPITA", ascending=worst)
+        .sort_values("LEITOS_TOTAL_PER_THOUSAND", ascending=worst)
         .head(top_n)
     )
 

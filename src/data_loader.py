@@ -21,13 +21,7 @@ def validate_data_hosp(df):
     "DS_TIPO_UNIDADE",
     "NU_TELEFONE",
     "NO_EMAIL",
-    "LEITOS_EXISTENTES",
-    "UTI_ADULTO_EXIST",
-    "UTI_ADULTO_SUS",
-    "UTI_PEDIATRICO_EXIST",
-    "UTI_PEDIATRICO_SUS",
-    "UTI_NEONATAL_EXIST",
-    "UTI_NEONATAL_SUS"
+    "LEITOS_SUS",
     ]
     validate_columns(df, required_columns)
 

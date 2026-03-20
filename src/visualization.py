@@ -43,9 +43,9 @@ def plot_worst_large_cities(df, min_population=100_000, top_n=10, show=False):
     return plot_barh(
         df=df_worst,
         y_col="LABEL",
-        x_col="UTI_TOTAL_PER_CAPITA",
+        x_col="LEITOS_TOTAL_PER_THOUSAND",
         title=f"Worst {top_n} Cities (> {min_population:,} inhabitants)",
-        xlabel="ICU per capita",
+        xlabel="Hospital beds per thousand",
         filename=f"worst_{top_n}_cities_over_{min_population}_icu.png",
         show=show
     )
@@ -56,9 +56,9 @@ def plot_best_large_cities(df, min_population=100_000, top_n=10, show=False):
     return plot_barh(
         df=df_best,
         y_col="LABEL",
-        x_col="UTI_TOTAL_PER_CAPITA",
+        x_col="LEITOS_TOTAL_PER_THOUSAND",
         title=f"Best {top_n} Cities (> {min_population:,} inhabitants)",
-        xlabel="ICU per capita",
+        xlabel="Hospital beds per thousand",
         filename=f"best_{top_n}_cities_over_{min_population}_icu.png",
         show=show
     )
@@ -87,7 +87,7 @@ def export_excel_report(df, filename="icu_report.xlsx", min_population=100_000):
     output_dir = get_output_dir("excel")
     output_path = output_dir / filename
 
-    df_sorted = df.sort_values("UTI_TOTAL_PER_CAPITA", ascending=False)
+    df_sorted = df.sort_values("LEITOS_TOTAL_PER_THOUSAND", ascending=False)
     df_top_10 = df_sorted.head(10)
     df_worst_10 = get_large_cities(df, min_population, 10)
 
@@ -109,14 +109,14 @@ def export_excel_report(df, filename="icu_report.xlsx", min_population=100_000):
 def export_csv_report(df, filename="icu_report.csv", top_n=None):
     output_dir = get_output_dir("csv")
 
-    df_sorted = df.sort_values("UTI_TOTAL_PER_CAPITA", ascending=False)
+    df_sorted = df.sort_values("LEITOS_TOTAL_PER_THOUSAND", ascending=False)
 
     output_path = output_dir / filename
     df_sorted.to_csv(output_path, index=False, encoding="utf-8-sig")
 
     top_path = None
     if top_n:
-        top_path = output_dir / f"top_{top_n}_cities_icu_per_capita.csv"
+        top_path = output_dir / f"top_{top_n}_cities_hospital_beds_per_capita.csv"
         df_sorted.head(top_n).to_csv(top_path, index=False, encoding="utf-8-sig")
 
     return output_path, top_path

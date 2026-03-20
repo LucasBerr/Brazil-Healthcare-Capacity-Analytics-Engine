@@ -8,12 +8,7 @@ REQUIRED_COLUMNS_HOSPITAL = [
     "NU_TELEFONE",
     "NO_EMAIL",
     "LEITOS_EXISTENTES",
-    "UTI_ADULTO_EXIST",
-    "UTI_ADULTO_SUS",
-    "UTI_PEDIATRICO_EXIST",
-    "UTI_PEDIATRICO_SUS",
-    "UTI_NEONATAL_EXIST",
-    "UTI_NEONATAL_SUS"
+    "LEITOS_SUS"
 ]
 REQUIRED_COLUMNS_POPULATION = [
     "UF",
@@ -25,13 +20,7 @@ def clean_data_hosp(df):
     df = df[REQUIRED_COLUMNS_HOSPITAL].copy()
 
     numeric_columns_hosp = [
-        "LEITOS_EXISTENTES",
-        "UTI_ADULTO_EXIST",
-        "UTI_ADULTO_SUS",
-        "UTI_PEDIATRICO_EXIST",
-        "UTI_PEDIATRICO_SUS",
-        "UTI_NEONATAL_EXIST",
-        "UTI_NEONATAL_SUS"
+        "LEITOS_SUS"
     ]
 
 

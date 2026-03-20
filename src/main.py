@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from analyzer import uti_per_capita_in_city
+from analyzer import hospital_bed_per_capita_in_city
 from data_loader import load_data, validate_data_hosp, validate_data_popul
 from cleaner import clean_data_hosp, clean_data_popul
 from visualization import (
@@ -31,7 +31,7 @@ def load_and_process_data():
     df_hosp = clean_data_hosp(df_hosp)
     df_popul = clean_data_popul(df_popul)
 
-    return uti_per_capita_in_city(df_hosp, df_popul)
+    return hospital_bed_per_capita_in_city(df_hosp, df_popul)
 
 
 # =========================
