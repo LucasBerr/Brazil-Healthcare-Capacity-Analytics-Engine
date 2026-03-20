@@ -29,8 +29,7 @@ Belford Roxo (518.384 hab)
 ...
 ```
 
-> Horizontal bar charts ranked strictly by hospital bed availability per 1,000 inhabitants
-
+![Top 10 Cities by Hospital Beds per 1,000 People](assets/images/best_10_cities_over_100000_bed.png)
 ---
 
 ## ⚙️ CLI Usage
