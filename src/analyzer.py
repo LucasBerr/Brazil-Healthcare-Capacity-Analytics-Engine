@@ -71,3 +71,23 @@ def uti_per_capita_in_city(df_hosp, df_popul):
         by="UTI_TOTAL_PER_CAPITA",
         ascending=False
     )
+
+def get_large_cities(df, min_population=100_000, top_n=10, worst=True):
+    df_filtered = df[df["POPULAÇÃO ESTIMADA"] > min_population]
+
+    df = (
+        df_filtered
+        .sort_values("UTI_TOTAL_PER_CAPITA", ascending=worst)
+        .head(top_n)
+    )
+
+    df["LABEL"] = (
+        df["MUNICIPIO_NORM"].str.title() +
+        " (" +
+        df["POPULAÇÃO ESTIMADA"]
+            .astype(int)
+            .apply(lambda x: f"{x:,}".replace(",", ".")) +
+        " hab)"
+    )
+
+    return df

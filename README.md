@@ -1,40 +1,152 @@
+Here’s a **GitHub-optimized README** with badges, structure, and visual appeal—designed to make your repo look **professional and recruiter-friendly**.
+
+---
+
 # 🇧🇷 Brazil Healthcare Capacity Analytics Engine
 
-A data analytics pipeline that processes Brazilian public healthcare datasets to generate actionable insights about hospital capacity, ICU availability, and population-based healthcare metrics.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-green)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-orange)
+![Status](https://img.shields.io/badge/Status-Active-success)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-This project simulates a real-world **data engineering + analytics workflow**, transforming raw government data into structured, analysis-ready outputs.
-
----
-
-## 🚀 Overview
-
-Healthcare capacity is a critical factor in public policy and emergency response. This project focuses on:
-
-* Aggregating hospital infrastructure data
-* Integrating population estimates
-* Computing **per capita healthcare metrics**
-* Identifying regional disparities in ICU availability
+A modular **data analytics pipeline + CLI tool** that transforms Brazilian public healthcare data into actionable insights on **ICU capacity per capita**.
 
 ---
 
-## 📊 Key Features
+## 🚀 Project Highlights
 
-* ✅ Data ingestion from real government sources
-* ✅ Data cleaning (encoding, formatting, normalization)
-* ✅ Robust dataset merging (handling inconsistencies in city names)
-* ✅ Feature engineering (ICU per capita metrics)
-* ✅ Aggregation from hospital-level → city-level
-* ✅ Ranking and analysis of healthcare capacity
-* ✅ Export to CSV and Excel for reporting
-* ✅ Data visualization (Top cities by ICU availability)
+* 📊 End-to-end **data pipeline** (raw → insights)
+* 🧠 ICU **per capita analytics**
+* 🖥️ Fully **CLI-driven (argparse)**
+* 📈 Clean and consistent **visualizations**
+* 📤 Export to **CSV & Excel (multi-sheet reports)**
+* ⚙️ Built with **real-world messy public data**
 
 ---
 
-## 🗂️ Data Sources
+## 📸 Example Output
+
+### 📊 Worst Large Cities (ICU per capita)
+
+```
+Belford Roxo (518.384 hab)
+...
+```
+
+> Horizontal bar charts ranked strictly by ICU per capita (no misleading sorting)
+
+---
+
+## ⚙️ CLI Usage
+
+### ▶️ Run everything (default)
+
+```bash
+python src/main.py
+```
+
+---
+
+### 📄 CSV Reports
+
+```bash
+python src/main.py csv --type icu
+python src/main.py csv --type all --top_n 20
+```
+
+---
+
+### 📊 Plots
+
+```bash
+python src/main.py plot --type best
+python src/main.py plot --type worst --min_population 250000 --top_n 20
+```
+
+---
+
+### 📑 Excel Report
+
+```bash
+python src/main.py excel
+```
+
+---
+
+### ❓ Help
+
+```bash
+python src/main.py --help
+```
+
+---
+
+## 🧠 Key Metric
+
+**ICU per Capita**
+
+```
+UTI_TOTAL_PER_CAPITA = Total ICU Beds / Population
+```
+
+✔ Enables fair comparison between cities of different sizes
+
+---
+
+## 🏗️ Architecture
+
+```
+Raw CSVs
+   ↓
+Data Loading
+   ↓
+Validation
+   ↓
+Cleaning & Normalization
+   ↓
+Merge (Hospital + Population)
+   ↓
+Aggregation (City Level)
+   ↓
+Feature Engineering
+   ↓
+Filtering (Population Threshold)
+   ↓
+Ranking (Best / Worst)
+   ↓
+Outputs (CSV / Excel / Plots)
+```
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+  ├── main.py              # CLI (argparse)
+  ├── analyzer.py         # Metrics
+  ├── data_loader.py      # Load + validate
+  ├── cleaner.py          # Cleaning logic
+  ├── visualization.py    # Plots + exports
+
+data/
+  ├── Leitos_2026.csv
+  ├── POP2025_20251031(Municípios).csv
+
+outputs/
+  ├── csv/
+  ├── excel/
+  ├── plots/
+```
+
+---
+
+## 🧪 Data Sources
 
 ### 🏥 Hospital Infrastructure
 
-* Dataset: **"Leitos 2026"**
+* Dataset: *"Leitos 2026"*
 * Source: [https://dados.gov.br/dados/conjuntos-dados/hospitais-e-leitos](https://dados.gov.br/dados/conjuntos-dados/hospitais-e-leitos)
 * Contains:
 
@@ -46,7 +158,7 @@ Healthcare capacity is a critical factor in public policy and emergency response
 
 ### 👥 Population Data
 
-* Dataset: **"POP2025"**
+* Dataset: *"POP2025"*
 * Source: [https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2025/](https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2025/)
 * Contains:
 
@@ -54,74 +166,23 @@ Healthcare capacity is a critical factor in public policy and emergency response
 
 ---
 
-## ⚙️ Pipeline Architecture
+## ⚠️ Real-World Challenges Solved
 
-```text
-Raw CSVs
-   ↓
-Data Cleaning
-   - Encoding fixes (UTF-8 / latin-1)
-   - Column normalization
-   - Numeric parsing (Brazilian formats)
-   ↓
-Data Validation
-   - Required columns
-   - Missing values
-   ↓
-Data Integration (Merge)
-   - Municipality normalization
-   - Join hospital + population data
-   ↓
-Aggregation
-   - Group by (UF, Município)
-   - Sum ICU capacity
-   ↓
-Feature Engineering
-   - ICU per capita metrics
-   ↓
-Analysis & Ranking
-   - Top cities by ICU availability
-   ↓
-Export
-   - CSV / Excel
-   - Visualizations
-```
-
----
-
-## 🧠 Key Metrics
-
-* **UTI_TOTAL_SUS**
-  Total ICU beds available per city
-
-* **UTI_TOTAL_PER_CAPITA**
-  ICU beds normalized by population
-
-```text
-UTI_TOTAL_PER_CAPITA = Total ICU Beds / Population
-```
-
----
-
-## 📈 Example Analysis
-
-* Top 10 cities with highest ICU availability per capita
-* Comparison across states (UF)
-* Identification of underserved regions
-* Detection of data inconsistencies (e.g., missing population)
-
----
-
-## ⚠️ Data Challenges Solved
-
-This project handles several real-world data issues:
-
-* Inconsistent municipality naming (accents, casing)
+* Inconsistent city names (accents, casing)
 * Mixed encodings (`latin-1` vs UTF-8)
-* Brazilian numeric formats (`1.234.567`)
-* Missing or misaligned columns in CSVs
-* Merge mismatches between datasets
-* Division errors (e.g., `inf` from zero population)
+* Brazilian number formats (`1.234.567`)
+* Missing and invalid data
+* Dataset merge inconsistencies
+* Division edge cases (e.g., zero population)
+
+---
+
+## 📈 Visualization Principles
+
+* Horizontal bar charts → better ranking readability
+* Labels include population → adds context
+* Strict sorting by ICU per capita → avoids bias
+* No secondary sorting → preserves analytical integrity
 
 ---
 
@@ -130,92 +191,43 @@ This project handles several real-world data issues:
 * Python
 * pandas
 * matplotlib
-* openpyxl / xlsxwriter
+* openpyxl
+* argparse
 
 ---
 
-## 📁 Project Structure
+## 🎯 Why This Project Stands Out
 
-```text
-src/
-  ├── main.py
-  ├── data_loader.py
-  ├── processing.py
-  ├── analysis.py
+This project demonstrates:
 
-data/
-  ├── raw/
-  ├── processed/
-
-outputs/
-  ├── csv/
-  ├── excel/
-  ├── plots/
-```
+* ✅ Data Engineering pipeline design
+* ✅ Real-world data cleaning
+* ✅ CLI-based analytics tooling
+* ✅ Analytical rigor (correct ranking logic)
+* ✅ Clear data storytelling
 
 ---
 
-## ▶️ How to Run
+## 🚀 Future Improvements
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/Brazil-Healthcare-Capacity-Analytics-Engine.git
-cd Brazil-Healthcare-Capacity-Analytics-Engine
-```
-
-2. Create and activate a virtual environment:
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux / Mac
-venv\Scripts\activate     # Windows
-```
-
-3. Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Run the pipeline:
-
-```bash
-python src/main.py
-```
-
----
-
-## 📤 Outputs
-
-* Cleaned datasets
-* Aggregated city-level metrics
-* Ranked ICU capacity results
-* Excel reports
-* Visualizations (Top cities)
-
----
-
-## 🎯 Future Improvements
-
-* Integrate municipality codes (IBGE) for more reliable joins
-* Add geospatial visualization (maps)
-* Build an interactive dashboard (Streamlit / Power BI)
-* Time-series analysis of healthcare capacity
-* Predictive modeling for demand vs capacity
-
----
-
-## 💡 What This Project Demonstrates
-
-* Data cleaning and preprocessing in real-world scenarios
-* Handling messy public datasets
-* Building reliable data pipelines
-* Analytical thinking and metric design
-* Translating raw data into business-relevant insights
+* Add IBGE municipality codes (stronger joins)
+* Geospatial visualization (maps)
+* Interactive dashboard (Streamlit)
+* Time-series healthcare analysis
+* Package as installable CLI tool
 
 ---
 
 ## 📌 Author
 
-Developed as a portfolio project focused on **Data Analytics and Data Engineering** in the healthcare domain.
+Portfolio project focused on **Data Analytics & Data Engineering**, with emphasis on:
+
+* Real-world datasets
+* Scalable design
+* Insight generation
+
+---
+
+## ⭐ If you found this useful
+
+Give the repo a star — it helps a lot!
