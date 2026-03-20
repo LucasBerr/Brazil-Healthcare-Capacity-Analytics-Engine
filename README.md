@@ -25,7 +25,7 @@ A modular **data analytics pipeline + CLI tool** that transforms Brazilian publi
 ### 📊 Worst Large Cities (Hospital beds per 1,000 people)
 
 ```
-Palhoça 253.469 hab with none hospital beds
+Palhoça (253,469 inhabitants) — no hospital beds
 ...
 ```
 
