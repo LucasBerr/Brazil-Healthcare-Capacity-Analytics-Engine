@@ -4,7 +4,6 @@
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-green)
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-orange)
 ![Status](https://img.shields.io/badge/Status-Active-success)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 A modular **data analytics pipeline + CLI tool** that transforms Brazilian public healthcare data into actionable insights on **hospital bed availability per 1,000 inhabitants in the SUS healthcare system**.
 
