@@ -22,10 +22,10 @@ A modular **data analytics pipeline + CLI tool** that transforms Brazilian publi
 
 ## 📸 Example Output
 
-### 📊 Worst Large Cities (Hospital beds per 1,000 people)
+### 📊 Best Large Cities (Hospital beds per 1,000 people)
 
 ```
-Belford Roxo (518.384 hab)
+Campo Largo 
 ...
 ```
 
