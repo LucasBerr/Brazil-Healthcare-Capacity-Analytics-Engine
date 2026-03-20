@@ -22,14 +22,14 @@ A modular **data analytics pipeline + CLI tool** that transforms Brazilian publi
 
 ## 📸 Example Output
 
-### 📊 Best Large Cities (Hospital beds per 1,000 people)
+### 📊 Worst Large Cities (Hospital beds per 1,000 people)
 
 ```
-Campo Largo 
+Palhoça 253.469 hab with none hospital beds
 ...
 ```
 
-![Top 10 Cities by Hospital Beds per 1,000 People](assets/images/best_10_cities_over_100000_bed.png)
+![Worst 10 Cities by Hospital Beds per 1,000 People](assets/images/worst_10_cities_over_100000_bed.png)
 ---
 
 ## ⚙️ CLI Usage
