@@ -40,7 +40,7 @@ def load_and_process_data():
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="ICU Analytics Pipeline"
+        description="Hospital beds Analytics Pipeline"
     )
 
     parser.add_argument(
@@ -53,7 +53,7 @@ def parse_args():
 
     parser.add_argument(
         "--type",
-        choices=["icu", "all", "best", "worst"],
+        choices=["bed", "all", "best", "worst"],
         help="Type of operation"
     )
 
@@ -96,16 +96,16 @@ def run_all_reports(df, args):
     print("All reports generated.")
 
 def run_csv_report(df, args):
-    if args.type == "icu":
+    if args.type == "bed":
         export_csv_report(df)
-        print("CSV ICU report generated.")
+        print("CSV bed report generated.")
 
     elif args.type == "all":
         export_csv_report(df, top_n=args.top_n)
         print("All CSV reports generated.")
 
     else:
-        print("Specify --type icu or --type all")
+        print("Specify --type bed or --type all")
      
 def run_plot_report(df, args):
     if args.type == "best":

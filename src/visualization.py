@@ -46,7 +46,7 @@ def plot_worst_large_cities(df, min_population=100_000, top_n=10, show=False):
         x_col="LEITOS_TOTAL_PER_THOUSAND",
         title=f"Worst {top_n} Cities (> {min_population:,} inhabitants)",
         xlabel="Hospital beds per thousand",
-        filename=f"worst_{top_n}_cities_over_{min_population}_icu.png",
+        filename=f"worst_{top_n}_cities_over_{min_population}_bed.png",
         show=show
     )
 
@@ -59,7 +59,7 @@ def plot_best_large_cities(df, min_population=100_000, top_n=10, show=False):
         x_col="LEITOS_TOTAL_PER_THOUSAND",
         title=f"Best {top_n} Cities (> {min_population:,} inhabitants)",
         xlabel="Hospital beds per thousand",
-        filename=f"best_{top_n}_cities_over_{min_population}_icu.png",
+        filename=f"best_{top_n}_cities_over_{min_population}_bed.png",
         show=show
     )
 
@@ -83,7 +83,7 @@ def format_excel_sheet(worksheet):
     worksheet.auto_filter.ref = worksheet.dimensions
 
 
-def export_excel_report(df, filename="icu_report.xlsx", min_population=100_000):
+def export_excel_report(df, filename="bed_report.xlsx", min_population=100_000):
     output_dir = get_output_dir("excel")
     output_path = output_dir / filename
 
@@ -106,7 +106,7 @@ def export_excel_report(df, filename="icu_report.xlsx", min_population=100_000):
 # EXPORT - CSV
 # =========================
 
-def export_csv_report(df, filename="icu_report.csv", top_n=None):
+def export_csv_report(df, filename="bed_report.csv", top_n=None):
     output_dir = get_output_dir("csv")
 
     df_sorted = df.sort_values("LEITOS_TOTAL_PER_THOUSAND", ascending=False)
