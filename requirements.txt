@@ -1,1 +1,1 @@
-pip install pandas, openpyxl, matplotlib
+pip install pandas, openpyxl, matplotlib, pysus, pyarrow
